@@ -1,6 +1,8 @@
-# 🚀 Neovim Configuration (VS Code Style)
+# ⚡️ Velox
 
-이 설정은 Neovim v0.11+을 기반으로 하며, VS Code와 유사한 사용자 경험을 제공하도록 설계되었습니다.
+> **"Swift, Rapid."** (Latin)
+
+**Velox**는 Neovim의 압도적인 **속도**와 VS Code의 **현대적인 사용성**을 결합한 하이브리드 에디터 설정입니다. Neovim v0.11+을 기반으로 하며, 복잡한 설정 없이도 직관적으로 사용할 수 있도록 설계되었습니다.
 
 ## 🛠️ 필수 요구 사항
 
