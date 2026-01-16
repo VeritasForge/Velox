@@ -1,0 +1,17 @@
+# Neovim swap files
+*.swp
+*.swo
+
+# Undo files (if you configure undodir locally, though usually in ~/.local/state)
+*.un~
+
+# Session files
+Session.vim
+
+# Logs
+*.log
+
+# Mac system files
+.DS_Store
+
+# Note: Do NOT ignore lazy-lock.json. It ensures plugin version consistency across machines.
