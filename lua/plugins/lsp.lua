@@ -20,6 +20,22 @@ return {
     end,
   },
 
+  -- Auto-install linters & formatters
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    dependencies = { "mason-org/mason.nvim" },
+    config = function()
+      require("mason-tool-installer").setup({
+        ensure_installed = {
+          "ruff", -- Python linter/formatter
+          "stylua", -- Lua formatter
+          "ktlint", -- Kotlin linter/formatter
+          "golangci-lint", -- Go linter
+        },
+      })
+    end,
+  },
+
   -- Completion
   {
     "hrsh7th/nvim-cmp",
@@ -90,7 +106,43 @@ return {
       })
 
       -- 0.11+ 권장: vim.lsp.config / vim.lsp.enable :contentReference[oaicite:6]{index=6}
-      vim.lsp.config("pyright", { capabilities = capabilities, on_attach = on_attach })
+      vim.lsp.config("pyright", {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+              diagnosticMode = "workspace",
+            },
+          },
+        },
+        on_init = function(client)
+          local root_dir = client.workspace_folders and client.workspace_folders[1].name or vim.loop.cwd()
+          local venv_python = nil
+
+          -- 가상환경 내의 python 실행 파일 위치 후보군
+          local potential_paths = {
+            root_dir .. "/.uv/bin/python",
+            root_dir .. "/.venv/bin/python",
+            root_dir .. "/venv/bin/python",
+          }
+
+          for _, path in ipairs(potential_paths) do
+            if vim.loop.fs_stat(path) then
+              venv_python = path
+              break
+            end
+          end
+
+          if venv_python then
+            client.config.settings.python.pythonPath = venv_python
+            client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+          end
+          return true
+        end,
+      })
       vim.lsp.config("gopls",   { capabilities = capabilities, on_attach = on_attach })
       vim.lsp.config("kotlin_language_server", { capabilities = capabilities, on_attach = on_attach })
 

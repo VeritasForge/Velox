@@ -49,13 +49,24 @@ make install
 | :--- | :--- |
 | **`<Ctrl> + p`** | **스마트 파일 찾기** (프로젝트 내 파일 검색) |
 | `<Space> + e` | **파일 탐색기** (Neo-tree) 토글 |
+| &nbsp; | *탐색기 너비 조절: 창에서 `5>` (확대), `5<` (축소)* |
 | `<Space> + ff` | 일반 파일 찾기 (숨김 파일 포함) |
 | `<Space> + fg` | **전체 텍스트 검색** (Live Grep) |
 | `<Shift> + l / h` | **다음 / 이전 탭으로 이동** |
 | **`<Space> + x`** | **현재 탭(버퍼) 닫기** |
+| `<Space> + ba` | **다른 모든 탭 닫기** (Close Others) |
 | `<Space> + n` | 새 빈 문서(Buffer) 열기 |
 
-### 2. 🧠 코드 지능형 기능 (LSP)
+### 2. 🪟 창 분할 및 관리 (Window Splitting)
+
+| 단축키/명령어 | 기능 설명 |
+| :--- | :--- |
+| `:vs` 또는 `<Ctrl>+w v` | **좌우 분할** (Vertical Split) |
+| `:sp` 또는 `<Ctrl>+w s` | **상하 분할** (Horizontal Split) |
+| `<Ctrl> + h/j/k/l` | **분할된 창 사이 이동** |
+| `<Ctrl>+w >` / `<` | 창 너비 조절 |
+
+### 3. 🧠 코드 지능형 기능 (LSP)
 
 | 단축키 | 기능 설명 |
 | :--- | :--- |
@@ -66,7 +77,7 @@ make install
 | `<Space> + ca` | 코드 액션 (Code Action) |
 | `[d` / `]d` | 이전 / 다음 에러 위치 이동 |
 
-### 3. ✍️ 편집 및 도구 (Editing & Tools)
+### 4. ✍️ 편집 및 도구 (Editing & Tools)
 
 | 단축키 | 기능 설명 |
 | :--- | :--- |
@@ -76,7 +87,7 @@ make install
 | `<Space> + w` | 파일 저장 |
 | `<Space> + q` | Neovim 종료 |
 
-### 4. 🐙 Git 통합 (Gitsigns)
+### 5. 🐙 Git 통합 (Gitsigns)
 
 | 단축키 | 기능 설명 |
 | :--- | :--- |
@@ -85,7 +96,17 @@ make install
 | `<Space> + hp` | 변경 사항 미리보기 (Preview) |
 | `]c` / `[c` | 다음 / 이전 변경 지점(Hunk) 이동 |
 
-### 5. 🐞 디버깅 (DAP)
+### 6. 🧪 테스트 실행 (Neotest)
+
+| 단축키 | 기능 설명 |
+| :--- | :--- |
+| **`<Space> + tr`** | **현재 테스트 실행** (Run Nearest) |
+| `<Space> + tf` | 현재 파일의 모든 테스트 실행 |
+| `<Space> + ts` | **테스트 요약 보기** (Summary) |
+| `<Space> + to` | 테스트 결과 출력 보기 (Output) |
+| `<Space> + td` | 테스트 디버깅 (Debug) |
+
+### 7. 🐞 디버깅 (DAP)
 
 | 단축키 | 기능 설명 |
 | :--- | :--- |

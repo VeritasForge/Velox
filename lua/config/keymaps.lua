@@ -6,6 +6,7 @@ map("n", "<leader>q", "<cmd>q<cr>", opts)
 
 -- 탭(버퍼) 관리
 map("n", "<leader>x", "<cmd>bd<cr>", { desc = "Close Buffer" })
+map("n", "<leader>ba", "<cmd>BufferLineCloseOthers<cr>", { desc = "Close All Other Buffers" })
 map("n", "<leader>n", "<cmd>enew<cr>", { desc = "New Empty Buffer" })
 
 map("n", "<C-h>", "<C-w>h", opts)

@@ -68,3 +68,10 @@ A `Makefile` is provided to automate the installation of Neovim and external dep
     *   Renamed project to **Velox** in `README.md`.
     *   Added Gemini CLI agent configuration (`.gemini/GEMINI.md`, `.gemini/commands/commit.toml`).
     *   Transitioned command definition from `.md` to `.toml` format.
+    *   **Feature Update (Testing & LSP)**:
+        *   Added `neotest` plugin (`lua/plugins/neotest.lua`) for integrated test execution, supporting Python (`pytest`) and Go.
+        *   Enhanced `pyright` LSP configuration (`lua/plugins/lsp.lua`) to automatically detect and use Python executables in `.uv` or `.venv` directories.
+        *   Added `mason-tool-installer` to `lua/plugins/lsp.lua` to automatically install external tools like `ruff` and `stylua`.
+    *   **UX Improvements**:
+        *   Added `<leader>ba` keymap (`lua/config/keymaps.lua`) to close all buffers except the current one.
+        *   Updated `README.md` with comprehensive instructions for window splitting, explorer resizing, and test execution.
