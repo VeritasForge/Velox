@@ -40,6 +40,8 @@ return {
       require("bufferline").setup({
         options = {
           diagnostics = "nvim_lsp",
+          close_command = function(n) require("mini.bufremove").delete(n, false) end,
+          right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
           offsets = {
             { filetype = "neo-tree", text = "Explorer", highlight = "Directory", separator = true },
           },

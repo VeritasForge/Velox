@@ -1,4 +1,13 @@
 return {
+  -- 윈도우 레이아웃을 유지하면서 버퍼 삭제 (:bd 대체)
+  {
+    "echasnovski/mini.bufremove",
+    version = false,
+    keys = {
+      { "<leader>x", function() require("mini.bufremove").delete(0, false) end, desc = "Close Buffer" },
+    },
+  },
+
   {
     "numToStr/Comment.nvim",
     event = { "BufReadPre", "BufNewFile" },

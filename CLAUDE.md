@@ -35,7 +35,7 @@ Each file in `lua/plugins/` is a self-contained lazy.nvim plugin spec (table wit
 |------|---------------|
 | `lsp.lua` | LSP configs (pyright, gopls, kotlin_language_server), nvim-cmp completion, Mason auto-install |
 | `ui.lua` | Neo-tree file explorer, lualine statusline, bufferline tabs, colorscheme, fidget |
-| `editor.lua` | Comment.nvim, autopairs, indent-blankline |
+| `editor.lua` | mini.bufremove (safe buffer delete), Comment.nvim, autopairs, indent-blankline |
 | `telescope.lua` | Fuzzy finder with fzf-native, smart git_files→find_files fallback |
 | `treesitter.lua` | Syntax highlighting and parsing |
 | `formatting.lua` | conform.nvim (format-on-save) + nvim-lint |
@@ -56,6 +56,8 @@ Each file in `lua/plugins/` is a self-contained lazy.nvim plugin spec (table wit
 - Lua: stylua
 - Go: gofmt + goimports
 - Kotlin: ktlint
+
+**Buffer deletion uses mini.bufremove** - Never use `:bd` or `:bdelete` for buffer close keymaps. Neo-tree's `close_if_last_window = true` causes Neovim to exit when `:bd` removes the last non-sidebar window. Use `require("mini.bufremove").delete()` instead (preserves window layout). Bufferline's `close_command` and `right_mouse_command` are also configured to use mini.bufremove.
 
 **Lazy loading** - Plugins use event triggers (`InsertEnter`, `BufReadPre`, `LspAttach`, etc.) for fast startup. Preserve this when adding new plugins.
 
