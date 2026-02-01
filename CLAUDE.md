@@ -34,7 +34,8 @@ Each file in `lua/plugins/` is a self-contained lazy.nvim plugin spec (table wit
 | File | Responsibility |
 |------|---------------|
 | `lsp.lua` | LSP configs (pyright, gopls, kotlin_language_server), nvim-cmp completion, Mason auto-install |
-| `ui.lua` | Neo-tree file explorer, lualine statusline, bufferline tabs, colorscheme, fidget |
+| `colorscheme.lua` | Darcula colorscheme + Python PyCharm-style treesitter highlight overrides |
+| `ui.lua` | Neo-tree file explorer, lualine statusline, bufferline tabs, fidget |
 | `editor.lua` | mini.bufremove (safe buffer delete), Comment.nvim, autopairs, indent-blankline |
 | `telescope.lua` | Fuzzy finder with fzf-native, smart git_files→find_files fallback |
 | `treesitter.lua` | Syntax highlighting and parsing |
