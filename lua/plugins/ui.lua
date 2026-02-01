@@ -13,6 +13,7 @@ return {
         popup_border_style = "rounded",
         filesystem = {
           follow_current_file = { enabled = true },
+          use_libuv_file_watcher = true, -- OS 레벨 파일 감시로 외부 변경 자동 감지
           filtered_items = { hide_dotfiles = false, hide_gitignored = true },
         },
         window = { position = "left", width = 32 },
