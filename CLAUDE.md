@@ -45,6 +45,7 @@ Each file in `lua/plugins/` is a self-contained lazy.nvim plugin spec (table wit
 | `dap.lua` | Debug adapter protocol (debugpy, delve) |
 | `neotest.lua` | Test runner (pytest, Go, Plenary adapters) |
 | `terminal.lua` | toggleterm integrated terminal |
+| `im-select.lua` | Auto-switch macOS IME to English in Normal mode (im-select.nvim) |
 
 ### Key Patterns
 
@@ -61,6 +62,8 @@ Each file in `lua/plugins/` is a self-contained lazy.nvim plugin spec (table wit
 **Buffer deletion uses mini.bufremove** - Never use `:bd` or `:bdelete` for buffer close keymaps. Neo-tree's `close_if_last_window = true` causes Neovim to exit when `:bd` removes the last non-sidebar window. Use `require("mini.bufremove").delete()` instead (preserves window layout). Bufferline's `close_command` and `right_mouse_command` are also configured to use mini.bufremove.
 
 **Lazy loading** - Plugins use event triggers (`InsertEnter`, `BufReadPre`, `LspAttach`, etc.) for fast startup. Preserve this when adding new plugins.
+
+**Korean IME auto-switch** - `im-select.nvim` requires the `im-select` CLI (`~/.local/bin/im-select`). It auto-switches to English (`com.apple.keylayout.ABC`) on `InsertLeave`/`CmdlineLeave` and restores the previous IME on `InsertEnter`. This prevents Korean characters from being inserted in Normal mode.
 
 ## Adding a New Plugin
 
