@@ -22,7 +22,7 @@ Inside Neovim:
 
 ### Bootstrap Flow
 
-`init.lua` → sets leader key (Space) → loads three modules in order:
+`init.lua` → sets leader key (Space) → disables netrw → sets up stdin detection → loads three modules in order:
 1. `lua/config/options.lua` - Vim options (2-space indent, system clipboard, etc.)
 2. `lua/config/keymaps.lua` - Core keybindings (window nav, buffer management)
 3. `lua/config/lazy.lua` - Bootstraps lazy.nvim, which auto-imports all `lua/plugins/*.lua`
@@ -45,6 +45,7 @@ Each file in `lua/plugins/` is a self-contained lazy.nvim plugin spec (table wit
 | `dap.lua` | Debug adapter protocol (debugpy, delve) |
 | `neotest.lua` | Test runner (pytest, Go, Plenary adapters) |
 | `terminal.lua` | toggleterm integrated terminal |
+| `session.lua` | persistence.nvim 세션 자동 저장/복원 (디렉토리+브랜치별) |
 | `im-select.lua` | Auto-switch macOS IME to English in Normal mode (im-select.nvim) |
 
 ### Key Patterns
@@ -77,6 +78,10 @@ Each file in `lua/plugins/` is a self-contained lazy.nvim plugin spec (table wit
 **Lualine OS icon** - The statusline `lualine_x` section replaces the default `fileformat` component with a custom function that detects the actual OS via `vim.uv.os_uname().sysname` and shows a Nerd Font icon (Darwin=`\u{f179}`, Linux=`\u{f17c}`, Windows=`\u{f17a}`). Use Lua `\u{...}` escapes for Nerd Font icons instead of pasting literal glyphs (they may be stripped during file write).
 
 **Pyright diagnosticMode** - Set to `"openFilesOnly"` (not `"workspace"`). Workspace mode causes pyright to scan the entire project and can get stuck on "1 file to analyze" indefinitely, especially without a detected virtual environment.
+
+**Session auto-restore** - persistence.nvim이 VimLeavePre에서 디렉토리+브랜치별 세션을 자동 저장. `nvim` (인수 없이)로 같은 디렉토리에서 열면 VimEnter autocmd가 자동 복원. `nvim file.lua`처럼 파일을 지정하거나 stdin 파이프 시에는 복원하지 않음. `<leader>qs`로 수동 복원, `<leader>qd`로 저장 중지. 세션 저장 전 Neo-tree, DAP UI, toggleterm 버퍼를 자동 정리.
+
+**netrw disabled** - `init.lua`에서 `vim.g.loaded_netrw = 1`로 비활성화. Neo-tree가 대체하며, 디렉토리 인수(`nvim .`)는 Neo-tree의 `init` 블록 VimEnter autocmd가 처리. netrw를 다시 활성화하지 않도록 주의.
 
 **Diagnostic float on CursorHold** - A `CursorHold` autocmd in `lsp.lua` automatically opens a floating window (`vim.diagnostic.open_float`) showing the full diagnostic message at the cursor position. This supplements `virtual_text` which can be truncated on long lines. The float is `focusable = false` and `scope = "cursor"`. Responsiveness depends on `updatetime` (default 4s; lower to ~300ms in `options.lua` if needed).
 
