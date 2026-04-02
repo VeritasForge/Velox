@@ -11,21 +11,6 @@ return {
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
     },
-    init = function()
-      -- netrw 비활성화 상태에서 nvim . (디렉토리 인수) 처리
-      vim.api.nvim_create_autocmd("VimEnter", {
-        callback = function()
-          if vim.fn.argc() == 1 then
-            local arg = vim.fn.argv(0)
-            local stat = vim.uv.fs_stat(arg)
-            if stat and stat.type == "directory" then
-              vim.cmd("Neotree dir=" .. vim.fn.fnameescape(arg))
-            end
-          end
-        end,
-        nested = true,
-      })
-    end,
     config = function()
       require("neo-tree").setup({
         close_if_last_window = true,

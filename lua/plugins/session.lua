@@ -14,12 +14,24 @@ return {
     local persistence = require("persistence")
     persistence.setup(opts)
 
-    -- 자동 복원: nvim을 인수 없이 열었을 때만
+    -- 자동 복원: nvim 또는 nvim . (디렉토리)로 열었을 때
     vim.api.nvim_create_autocmd("VimEnter", {
       group = vim.api.nvim_create_augroup("restore_session", { clear = true }),
       callback = function()
-        if vim.fn.argc() == 0 and not vim.g.started_with_stdin then
+        if vim.g.started_with_stdin then
+          return
+        end
+        local argc = vim.fn.argc()
+        if argc == 0 then
           persistence.load()
+        elseif argc == 1 then
+          local arg = vim.fn.argv(0)
+          local stat = vim.uv.fs_stat(arg)
+          if stat and stat.type == "directory" then
+            -- 디렉토리 버퍼를 닫고 세션 복원
+            vim.cmd("bwipeout")
+            persistence.load()
+          end
         end
       end,
       nested = true, -- 복원된 버퍼의 autocmd도 발동되도록
