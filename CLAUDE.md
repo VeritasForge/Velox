@@ -78,6 +78,8 @@ Each file in `lua/plugins/` is a self-contained lazy.nvim plugin spec (table wit
 
 **Pyright diagnosticMode** - Set to `"openFilesOnly"` (not `"workspace"`). Workspace mode causes pyright to scan the entire project and can get stuck on "1 file to analyze" indefinitely, especially without a detected virtual environment.
 
+**Diagnostic float on CursorHold** - A `CursorHold` autocmd in `lsp.lua` automatically opens a floating window (`vim.diagnostic.open_float`) showing the full diagnostic message at the cursor position. This supplements `virtual_text` which can be truncated on long lines. The float is `focusable = false` and `scope = "cursor"`. Responsiveness depends on `updatetime` (default 4s; lower to ~300ms in `options.lua` if needed).
+
 ## Adding a New Plugin
 
 Create a new file in `lua/plugins/` returning a lazy.nvim spec table. It will be auto-imported. Use appropriate lazy-loading events to avoid slowing startup.

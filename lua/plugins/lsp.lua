@@ -103,9 +103,16 @@ return {
       end
 
       vim.diagnostic.config({
-        virtual_text = true,
+        virtual_text = { spacing = 2 },
         severity_sort = true,
         float = { border = "rounded", source = "if_many" },
+      })
+
+      -- 커서가 에러 줄에 멈추면 전체 메시지를 float 팝업으로 표시
+      vim.api.nvim_create_autocmd("CursorHold", {
+        callback = function()
+          vim.diagnostic.open_float(nil, { focusable = false, scope = "cursor" })
+        end,
       })
 
       -- 0.11+ 권장: vim.lsp.config / vim.lsp.enable :contentReference[oaicite:6]{index=6}
