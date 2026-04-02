@@ -22,12 +22,18 @@ return {
             args = { "-F", "$FILENAME" },
             stdin = false,
           },
+          jq = {
+            command = "jq",
+            args = { "--indent", "2", "." },
+            stdin = true,
+          },
         },
         formatters_by_ft = {
           lua = { "stylua" },
           python = { "ruff_fix", "ruff_format" },
           go = { "gofmt", "goimports" },
           kotlin = { "ktlint_format" },
+          json = { "jq" },
         },
         format_on_save = function(_)
           return { timeout_ms = 2000, lsp_fallback = false }

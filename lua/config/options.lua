@@ -20,3 +20,9 @@ opt.smartcase = true
 opt.expandtab = true
 opt.shiftwidth = 2
 opt.tabstop = 2
+
+-- Treesitter 기반 코드 접기 (folding)
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldlevel = 99 -- 파일 열 때 모든 폴드 펼친 상태로 시작
+opt.foldlevelstart = 99

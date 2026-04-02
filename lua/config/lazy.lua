@@ -20,6 +20,17 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   { import = "plugins" },
 }, {
-  checker = { enabled = true },
+  checker = { enabled = true, notify = false },
   change_detection = { notify = false },
+})
+
+-- 플러그인 업데이트 감지 시 fidget으로 non-blocking 알림
+vim.api.nvim_create_autocmd("User", {
+  pattern = "LazyCheck",
+  callback = function()
+    local updates = require("lazy.status").updates()
+    if updates then
+      vim.notify("📦 " .. updates, vim.log.levels.INFO)
+    end
+  end,
 })

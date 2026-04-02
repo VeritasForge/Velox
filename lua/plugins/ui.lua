@@ -2,6 +2,10 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
+    cmd = "Neotree",
+    keys = {
+      { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" },
+    },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
@@ -18,7 +22,6 @@ return {
         },
         window = { position = "left", width = 32 },
       })
-      vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle Explorer" })
     end,
   },
 
@@ -28,6 +31,16 @@ return {
     config = function()
       require("lualine").setup({
         options = { globalstatus = true, icons_enabled = true, theme = "auto" },
+        winbar = {
+          lualine_c = {
+            { "filename", path = 1, icons_enabled = true }, -- path=1: 프로젝트 기준 상대 경로
+          },
+        },
+        inactive_winbar = {
+          lualine_c = {
+            { "filename", path = 1, icons_enabled = true },
+          },
+        },
       })
     end,
   },

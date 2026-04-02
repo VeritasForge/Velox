@@ -14,7 +14,7 @@ return {
     dependencies = { "mason-org/mason.nvim", "neovim/nvim-lspconfig" },
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "pyright", "gopls", "kotlin_language_server" },
+        ensure_installed = { "pyright", "gopls", "kotlin_language_server", "jsonls" },
         automatic_installation = true,
       })
     end,
@@ -35,6 +35,9 @@ return {
       })
     end,
   },
+
+  -- JSON 스키마 자동 제공 (package.json, tsconfig 등)
+  { "b0o/schemastore.nvim", lazy = true },
 
   -- Completion
   {
@@ -145,10 +148,21 @@ return {
       })
       vim.lsp.config("gopls",   { capabilities = capabilities, on_attach = on_attach })
       vim.lsp.config("kotlin_language_server", { capabilities = capabilities, on_attach = on_attach })
+      vim.lsp.config("jsonls", {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+          json = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
+          },
+        },
+      })
 
       vim.lsp.enable("pyright")
       vim.lsp.enable("gopls")
       vim.lsp.enable("kotlin_language_server")
+      vim.lsp.enable("jsonls")
     end,
   },
 }

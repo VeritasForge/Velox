@@ -65,8 +65,21 @@ make install
 | `:sp` 또는 `<Ctrl>+w s` | **상하 분할** (Horizontal Split) |
 | `<Ctrl> + h/j/k/l` | **분할된 창 사이 이동** |
 | `<Ctrl>+w >` / `<` | 창 너비 조절 |
+| `<Space> + q` 또는 `<Ctrl>+w c` | **분할된 창 닫기** |
 
-### 3. 🧠 코드 지능형 기능 (LSP)
+### 3. 📦 코드 접기 (Folding)
+
+Treesitter 기반으로 함수, 클래스, JSON 블록 등을 자동으로 접고 펼 수 있습니다.
+
+| 단축키 | 기능 설명 |
+| :--- | :--- |
+| `za` | 현재 위치 **폴드 토글** (접기/펼치기) |
+| `zc` | 현재 폴드 접기 |
+| `zo` | 현재 폴드 펼치기 |
+| `zM` | **전체 접기** |
+| `zR` | **전체 펼치기** |
+
+### 4. 🧠 코드 지능형 기능 (LSP)
 
 | 단축키 | 기능 설명 |
 | :--- | :--- |
@@ -76,8 +89,10 @@ make install
 | `<Space> + rn` | 이름 변경 (Rename) |
 | `<Space> + ca` | 코드 액션 (Code Action) |
 | `[d` / `]d` | 이전 / 다음 에러 위치 이동 |
+| **`<Ctrl> + o`** | **이전 위치로 돌아가기** (Jump Back) |
+| `<Ctrl> + i` | 다음 위치로 이동 (Jump Forward) |
 
-### 4. ✍️ 편집 및 도구 (Editing & Tools)
+### 5. ✍️ 편집 및 도구 (Editing & Tools)
 
 | 단축키 | 기능 설명 |
 | :--- | :--- |
@@ -87,7 +102,7 @@ make install
 | `<Space> + w` | 파일 저장 |
 | `<Space> + q` | Neovim 종료 |
 
-### 5. 🐙 Git 통합 (Gitsigns)
+### 6. 🐙 Git 통합 (Gitsigns)
 
 | 단축키 | 기능 설명 |
 | :--- | :--- |
@@ -96,7 +111,7 @@ make install
 | `<Space> + hp` | 변경 사항 미리보기 (Preview) |
 | `]c` / `[c` | 다음 / 이전 변경 지점(Hunk) 이동 |
 
-### 6. 🧪 테스트 실행 (Neotest)
+### 7. 🧪 테스트 실행 (Neotest)
 
 | 단축키 | 기능 설명 |
 | :--- | :--- |
@@ -106,7 +121,7 @@ make install
 | `<Space> + to` | 테스트 결과 출력 보기 (Output) |
 | `<Space> + td` | 테스트 디버깅 (Debug) |
 
-### 7. 🐞 디버깅 (DAP)
+### 8. 🐞 디버깅 (DAP)
 
 | 단축키 | 기능 설명 |
 | :--- | :--- |
@@ -116,6 +131,18 @@ make install
 | `<Space> + du` | 디버깅 UI 토글 |
 
 ---
+
+## 🌐 지원 언어 및 도구
+
+| 언어 | LSP | Formatter | Linter |
+| :--- | :--- | :--- | :--- |
+| Python | pyright | ruff (fix + format) | ruff |
+| Go | gopls | gofmt + goimports | golangci-lint |
+| Kotlin | kotlin_language_server | ktlint | ktlint |
+| JSON | jsonls + schemastore | jq (2-space indent) | jsonls |
+| Lua | — | stylua | — |
+
+> **JSON 참고**: `jq`가 시스템에 설치되어 있어야 합니다 (`brew install jq`). jsonls는 `package.json`, `tsconfig.json` 등 주요 JSON 파일에 대해 스키마 기반 자동완성과 유효성 검사를 제공합니다.
 
 ## 💡 유용한 팁
 

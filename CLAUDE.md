@@ -33,9 +33,9 @@ Each file in `lua/plugins/` is a self-contained lazy.nvim plugin spec (table wit
 
 | File | Responsibility |
 |------|---------------|
-| `lsp.lua` | LSP configs (pyright, gopls, kotlin_language_server), nvim-cmp completion, Mason auto-install |
+| `lsp.lua` | LSP configs (pyright, gopls, kotlin_language_server, jsonls+schemastore), nvim-cmp completion, Mason auto-install |
 | `colorscheme.lua` | Darcula colorscheme + Python PyCharm-style treesitter highlight overrides |
-| `ui.lua` | Neo-tree file explorer, lualine statusline, bufferline tabs, fidget |
+| `ui.lua` | Neo-tree file explorer, lualine statusline (with winbar relative path), bufferline tabs, fidget |
 | `editor.lua` | mini.bufremove (safe buffer delete), Comment.nvim, autopairs, indent-blankline |
 | `telescope.lua` | Fuzzy finder with fzf-native, smart git_files→find_files fallback |
 | `treesitter.lua` | Syntax highlighting and parsing |
@@ -58,12 +58,21 @@ Each file in `lua/plugins/` is a self-contained lazy.nvim plugin spec (table wit
 - Lua: stylua
 - Go: gofmt + goimports
 - Kotlin: ktlint
+- JSON: jq (2-space indent)
 
 **Buffer deletion uses mini.bufremove** - Never use `:bd` or `:bdelete` for buffer close keymaps. Neo-tree's `close_if_last_window = true` causes Neovim to exit when `:bd` removes the last non-sidebar window. Use `require("mini.bufremove").delete()` instead (preserves window layout). Bufferline's `close_command` and `right_mouse_command` are also configured to use mini.bufremove.
 
 **Lazy loading** - Plugins use event triggers (`InsertEnter`, `BufReadPre`, `LspAttach`, etc.) for fast startup. Preserve this when adding new plugins.
 
 **Korean IME auto-switch** - `im-select.nvim` requires the `im-select` CLI (`~/.local/bin/im-select`). It auto-switches to English (`com.apple.keylayout.ABC`) on `InsertLeave`/`CmdlineLeave` and restores the previous IME on `InsertEnter`. This prevents Korean characters from being inserted in Normal mode.
+
+**Treesitter folding** - Code folding uses `vim.treesitter.foldexpr()` with `foldlevel=99` so all folds start expanded. Configured in `options.lua`.
+
+**Plugin update notifications** - `lazy.lua` listens for the `LazyCheck` User autocmd and routes update counts through `vim.notify` (displayed by fidget.nvim as non-blocking notifications). The default `checker.notify` is disabled to prevent modal popups.
+
+**Neo-tree lazy loading** - Neo-tree uses `cmd = "Neotree"` and `keys` spec for lazy loading instead of eagerly loading on startup. The `<leader>e` keymap is defined in the lazy.nvim `keys` table, not via `vim.keymap.set`.
+
+**Lualine winbar** - lualine is configured with `winbar` and `inactive_winbar` sections showing relative file paths (`path = 1`) at the top of each window split.
 
 ## Adding a New Plugin
 
