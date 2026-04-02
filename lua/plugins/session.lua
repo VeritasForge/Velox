@@ -10,11 +10,9 @@ return {
     { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
     { "<leader>qd", function() require("persistence").stop() end, desc = "Stop Session Save" },
   },
-  config = function(_, opts)
-    local persistence = require("persistence")
-    persistence.setup(opts)
-
-    -- 자동 복원: nvim 또는 nvim . (디렉토리)로 열었을 때
+  -- init은 startup 시 실행 (플러그인 로드 전). VimEnter 콜백 안의
+  -- require("persistence")가 lazy-load를 트리거하므로 정상 작동.
+  init = function()
     vim.api.nvim_create_autocmd("VimEnter", {
       group = vim.api.nvim_create_augroup("restore_session", { clear = true }),
       callback = function()
@@ -23,32 +21,32 @@ return {
         end
         local argc = vim.fn.argc()
         if argc == 0 then
-          persistence.load()
+          require("persistence").load()
         elseif argc == 1 then
           local arg = vim.fn.argv(0)
           local stat = vim.uv.fs_stat(arg)
           if stat and stat.type == "directory" then
-            -- 디렉토리 버퍼를 닫고 세션 복원
             vim.cmd("bwipeout")
-            persistence.load()
+            require("persistence").load()
           end
         end
       end,
-      nested = true, -- 복원된 버퍼의 autocmd도 발동되도록
+      nested = true,
     })
+  end,
+  config = function(_, opts)
+    require("persistence").setup(opts)
 
     -- 세션 저장 전 특수 버퍼 정리
     vim.api.nvim_create_autocmd("User", {
       pattern = "PersistenceSavePre",
       callback = function()
-        -- Neo-tree 닫기
         pcall(vim.cmd, "Neotree close")
-        -- 특수 버퍼 삭제 (DAP UI, toggleterm 등)
         for _, buf in ipairs(vim.api.nvim_list_bufs()) do
           if vim.api.nvim_buf_is_valid(buf) then
             local ft = vim.bo[buf].filetype
             if
-              vim.startswith(ft, "dapui_") -- dapui_scopes, dapui_breakpoints 등 6종
+              vim.startswith(ft, "dapui_")
               or ft == "dap-repl"
               or ft == "dap-float"
               or ft == "toggleterm"
