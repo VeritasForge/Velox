@@ -31,6 +31,25 @@ return {
     config = function()
       require("lualine").setup({
         options = { globalstatus = true, icons_enabled = true, theme = "auto" },
+        sections = {
+          lualine_a = { "mode" },
+          lualine_b = { "branch", "diff", "diagnostics" },
+          lualine_c = { "filename" },
+          lualine_x = {
+            "encoding",
+            function()
+              local icons = {
+                Darwin = "\u{f179}",  -- nf-fa-apple
+                Linux  = "\u{f17c}",  -- nf-fa-linux
+                Windows = "\u{f17a}", -- nf-fa-windows
+              }
+              return icons[vim.uv.os_uname().sysname] or ""
+            end,
+            "filetype",
+          },
+          lualine_y = { "progress" },
+          lualine_z = { "location" },
+        },
         winbar = {
           lualine_c = {
             { "filename", path = 1, icons_enabled = true }, -- path=1: 프로젝트 기준 상대 경로

@@ -35,7 +35,7 @@ Each file in `lua/plugins/` is a self-contained lazy.nvim plugin spec (table wit
 |------|---------------|
 | `lsp.lua` | LSP configs (pyright, gopls, kotlin_language_server, jsonls+schemastore), nvim-cmp completion, Mason auto-install |
 | `colorscheme.lua` | Darcula colorscheme + Python PyCharm-style treesitter highlight overrides |
-| `ui.lua` | Neo-tree file explorer, lualine statusline (with winbar relative path), bufferline tabs, fidget |
+| `ui.lua` | Neo-tree file explorer, lualine statusline (with winbar relative path, OS icon), bufferline tabs, fidget |
 | `editor.lua` | mini.bufremove (safe buffer delete), Comment.nvim, autopairs, indent-blankline |
 | `telescope.lua` | Fuzzy finder with fzf-native, smart git_files→find_files fallback |
 | `treesitter.lua` | Syntax highlighting and parsing |
@@ -73,6 +73,10 @@ Each file in `lua/plugins/` is a self-contained lazy.nvim plugin spec (table wit
 **Neo-tree lazy loading** - Neo-tree uses `cmd = "Neotree"` and `keys` spec for lazy loading instead of eagerly loading on startup. The `<leader>e` keymap is defined in the lazy.nvim `keys` table, not via `vim.keymap.set`.
 
 **Lualine winbar** - lualine is configured with `winbar` and `inactive_winbar` sections showing relative file paths (`path = 1`) at the top of each window split.
+
+**Lualine OS icon** - The statusline `lualine_x` section replaces the default `fileformat` component with a custom function that detects the actual OS via `vim.uv.os_uname().sysname` and shows a Nerd Font icon (Darwin=`\u{f179}`, Linux=`\u{f17c}`, Windows=`\u{f17a}`). Use Lua `\u{...}` escapes for Nerd Font icons instead of pasting literal glyphs (they may be stripped during file write).
+
+**Pyright diagnosticMode** - Set to `"openFilesOnly"` (not `"workspace"`). Workspace mode causes pyright to scan the entire project and can get stuck on "1 file to analyze" indefinitely, especially without a detected virtual environment.
 
 ## Adding a New Plugin
 
