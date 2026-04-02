@@ -29,6 +29,11 @@ return {
         { "<leader>hb", desc = "Toggle blame" },
         { "<leader>hd", desc = "Diff this" },
 
+        { "<leader>q", group = "session" },
+        { "<leader>qs", desc = "Restore session (cwd)" },
+        { "<leader>ql", desc = "Restore last session" },
+        { "<leader>qd", desc = "Stop session save" },
+
         { "<leader>d", group = "debug" },
         { "<leader>db", desc = "Toggle breakpoint" },
         { "<leader>dB", desc = "Conditional breakpoint" },
