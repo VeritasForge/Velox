@@ -26,3 +26,6 @@ opt.foldmethod = "expr"
 opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 opt.foldlevel = 99 -- 파일 열 때 모든 폴드 펼친 상태로 시작
 opt.foldlevelstart = 99
+
+-- 세션 복원 시 저장할 항목 (folds 제외: treesitter foldexpr과 충돌 방지)
+opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
