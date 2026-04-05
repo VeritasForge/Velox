@@ -8,6 +8,12 @@ map("n", "<leader>q", "<cmd>q<cr>", opts)
 map("n", "<leader>ba", "<cmd>BufferLineCloseOthers<cr>", { desc = "Close All Other Buffers" })
 map("n", "<leader>n", "<cmd>enew<cr>", { desc = "New Empty Buffer" })
 
+-- Cmd+/ 주석 토글 (Comment.nvim)
+map("n", "<D-/>", function()
+  require("Comment.api").toggle.linewise.current()
+end, { desc = "Toggle Comment" })
+map("v", "<D-/>", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", { desc = "Toggle Comment" })
+
 map("n", "<C-h>", "<C-w>h", opts)
 map("n", "<C-j>", "<C-w>j", opts)
 map("n", "<C-k>", "<C-w>k", opts)

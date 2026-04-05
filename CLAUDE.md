@@ -63,7 +63,7 @@ Each file in `lua/plugins/` is a self-contained lazy.nvim plugin spec (table wit
 
 **Buffer deletion uses mini.bufremove** - Never use `:bd` or `:bdelete` for buffer close keymaps. Neo-tree's `close_if_last_window = true` causes Neovim to exit when `:bd` removes the last non-sidebar window. Use `require("mini.bufremove").delete()` instead (preserves window layout). Bufferline's `close_command` and `right_mouse_command` are also configured to use mini.bufremove.
 
-**Lazy loading** - Plugins use event triggers (`InsertEnter`, `BufReadPre`, `LspAttach`, etc.) for fast startup. Preserve this when adding new plugins.
+**Lazy loading** - Plugins use event triggers (`InsertEnter`, `BufReadPre`, `LspAttach`, etc.) for fast startup. Preserve this when adding new plugins. Lazy-load 플러그인의 `config` 블록은 플러그인 로드 후에만 실행되므로, startup에서 실행되어야 하는 autocmd(예: VimEnter)는 `init` 블록에 배치할 것. `init` 안의 `require("plugin")`은 콜백 안에서 호출하면 lazy-load를 트리거하므로 안전.
 
 **Korean IME auto-switch** - `im-select.nvim` requires the `im-select` CLI (`~/.local/bin/im-select`). It auto-switches to English (`com.apple.keylayout.ABC`) on `InsertLeave`/`CmdlineLeave` and restores the previous IME on `InsertEnter`. This prevents Korean characters from being inserted in Normal mode.
 
