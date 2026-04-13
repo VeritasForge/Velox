@@ -14,4 +14,8 @@ Session.vim
 # Mac system files
 .DS_Store
 
+# Docs
+docs/
+
 # Note: Do NOT ignore lazy-lock.json. It ensures plugin version consistency across machines.
+
