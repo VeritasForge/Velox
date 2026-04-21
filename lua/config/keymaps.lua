@@ -18,3 +18,6 @@ map("n", "<C-h>", "<C-w>h", opts)
 map("n", "<C-j>", "<C-w>j", opts)
 map("n", "<C-k>", "<C-w>k", opts)
 map("n", "<C-l>", "<C-w>l", opts)
+
+-- 검색 하이라이트 자동 제거 (Insert 모드 종료 시)
+map("i", "<Esc>", "<Esc><cmd>nohlsearch<cr>", { desc = "Exit insert and clear search highlight" })
