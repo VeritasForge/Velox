@@ -18,6 +18,7 @@ return {
           require("neotest-python")({
             dap = { justMyCode = false },
             runner = "pytest",
+            env = { MallocStackLogging = "0" },
             -- .uv 환경 자동 인식을 위해 python 명령어 경로 지정 가능
             python = function()
               local cwd = vim.fn.getcwd()
