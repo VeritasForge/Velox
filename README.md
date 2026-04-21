@@ -101,11 +101,21 @@ Treesitter 기반으로 함수, 클래스, JSON 블록 등을 자동으로 접�
 | **`<Cmd> + /`** | **주석 토글** (현재 줄 또는 선택 영역, GUI Neovim 전용) |
 | **`<Space> + cf`** | **코드 포맷팅** (Format on Save 포함) |
 | `<Space> + cl` | 코드 린트(Lint) 실행 |
-| `<Space> + tt` | **통합 터미널** 토글 |
 | `<Space> + w` | 파일 저장 |
 | `<Space> + q` | Neovim 종료 |
 
-### 6. 🐙 Git 통합 (Gitsigns)
+### 6. 💻 터미널 (toggleterm)
+
+Neovim 안에서 터미널을 열어 셸 명령을 바로 실행할 수 있습니다.
+
+| 단축키 | 기능 설명 |
+| :--- | :--- |
+| **`<Space> + tt`** | **터미널 열기/닫기** (토글) |
+| `<Ctrl+\> <Ctrl+n>` | 터미널 모드 → **Normal 모드로 전환** |
+
+> **사용 흐름**: `<Space>tt`로 터미널 열기 → 명령 실행 (예: `python -m pytest`) → `<Ctrl+\><Ctrl+n>`으로 Normal 모드 전환 → `<Space>tt`로 터미널 닫기
+
+### 7. 🐙 Git 통합 (Gitsigns)
 
 | 단축키 | 기능 설명 |
 | :--- | :--- |
@@ -114,7 +124,7 @@ Treesitter 기반으로 함수, 클래스, JSON 블록 등을 자동으로 접�
 | `<Space> + hp` | 변경 사항 미리보기 (Preview) |
 | `]c` / `[c` | 다음 / 이전 변경 지점(Hunk) 이동 |
 
-### 7. 🧪 테스트 실행 (Neotest)
+### 8. 🧪 테스트 실행 (Neotest)
 
 | 단축키 | 기능 설명 |
 | :--- | :--- |
@@ -124,7 +134,7 @@ Treesitter 기반으로 함수, 클래스, JSON 블록 등을 자동으로 접�
 | `<Space> + to` | 테스트 결과 출력 보기 (Output) |
 | `<Space> + td` | 테스트 디버깅 (Debug) |
 
-### 8. 🐞 디버깅 (DAP)
+### 9. 🐞 디버깅 (DAP)
 
 | 단축키 | 기능 설명 |
 | :--- | :--- |
