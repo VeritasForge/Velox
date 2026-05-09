@@ -6,6 +6,14 @@ map("n", "<leader>q", "<cmd>q<cr>", opts)
 
 -- 탭(버퍼) 관리 (<leader>x는 mini.bufremove가 담당)
 map("n", "<leader>ba", "<cmd>BufferLineCloseOthers<cr>", { desc = "Close All Other Buffers" })
+map("n", "<leader>bA", function()
+  local bufremove = require("mini.bufremove")
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.bo[buf].buflisted then
+      bufremove.delete(buf, false)
+    end
+  end
+end, { desc = "Close All Buffers (safe)" })
 map("n", "<leader>n", "<cmd>enew<cr>", { desc = "New Empty Buffer" })
 
 -- Cmd+/ 주석 토글 (Comment.nvim)

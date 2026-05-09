@@ -14,4 +14,5 @@ vim.api.nvim_create_autocmd("StdinReadPre", {
 
 require("config.options")
 require("config.keymaps")
+require("config.autocmds")
 require("config.lazy")

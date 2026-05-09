@@ -14,6 +14,9 @@ opt.splitright = true
 opt.splitbelow = true
 opt.hidden = true
 
+-- 외부에서 파일이 변경되면 자동 리로드 (실제 트리거는 autocmds.lua의 checktime)
+opt.autoread = true
+
 opt.ignorecase = true
 opt.smartcase = true
 
