@@ -23,6 +23,8 @@ install-mac:
 	brew install neovim --HEAD || brew upgrade neovim --HEAD
 	@echo "Installing tools..."
 	brew install ripgrep fd cmake
+	@echo "Installing Go (required for gopls, delve, golangci-lint via Mason)..."
+	brew install go
 	@echo "Installing macism (IME switcher for im-select.nvim)..."
 	brew tap laishulu/homebrew
 	brew trust --tap laishulu/homebrew
@@ -41,7 +43,7 @@ install-linux:
 	sudo add-apt-repository -y ppa:neovim-ppa/unstable
 	sudo apt-get update
 	@echo "Installing Neovim and dependencies..."
-	sudo apt-get install -y neovim ripgrep fd-find cmake python3-venv
+	sudo apt-get install -y neovim ripgrep fd-find cmake python3-venv golang-go
 	@echo "Setting up 'fd' alias (fdfind -> fd)..."
 	@mkdir -p ~/.local/bin
 	@ln -sf $$(which fdfind) ~/.local/bin/fd

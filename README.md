@@ -24,8 +24,8 @@ make install
 ```
 
 이 명령어는 다음 작업을 수행합니다:
-- **macOS**: `Homebrew`를 사용하여 Neovim(HEAD), ripgrep, fd, cmake 설치
-- **Ubuntu**: `apt` 및 `ppa:neovim-ppa/unstable`을 사용하여 최신 Neovim 및 도구 설치
+- **macOS**: `Homebrew`를 사용하여 Neovim(HEAD), ripgrep, fd, cmake, go 설치
+- **Ubuntu**: `apt` 및 `ppa:neovim-ppa/unstable`을 사용하여 최신 Neovim 및 도구(golang-go 포함) 설치
   - *Ubuntu 주의*: `fd` 명령어를 사용하기 위해 `~/.local/bin`에 심볼릭 링크를 생성합니다. 해당 경로가 `PATH`에 포함되어 있는지 확인해주세요.
 
 ## 📂 폴더 구조
