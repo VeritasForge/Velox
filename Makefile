@@ -23,6 +23,10 @@ install-mac:
 	brew install neovim --HEAD || brew upgrade neovim --HEAD
 	@echo "Installing tools..."
 	brew install ripgrep fd cmake
+	@echo "Installing macism (IME switcher for im-select.nvim)..."
+	brew tap laishulu/homebrew
+	brew trust --tap laishulu/homebrew
+	brew install macism
 	@echo "✅ Installation complete! Run 'nvim' to start."
 
 install-linux:
