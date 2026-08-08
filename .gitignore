@@ -14,6 +14,9 @@ Session.vim
 # Mac system files
 .DS_Store
 
+# Brainstorming visual companion scratch files (mockups, not project docs)
+.superpowers/
+
 # Docs (specs are committed for traceability; everything else under docs/ stays local, e.g. plans/)
 docs/*
 !docs/superpowers/
