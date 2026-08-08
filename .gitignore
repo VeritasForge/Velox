@@ -14,8 +14,11 @@ Session.vim
 # Mac system files
 .DS_Store
 
-# Docs
-docs/
+# Docs (specs are committed for traceability; everything else under docs/ stays local, e.g. plans/)
+docs/*
+!docs/superpowers/
+docs/superpowers/*
+!docs/superpowers/specs/
 
 # Note: Do NOT ignore lazy-lock.json. It ensures plugin version consistency across machines.
 
