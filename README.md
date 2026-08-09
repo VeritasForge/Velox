@@ -24,7 +24,7 @@ make install
 ```
 
 이 명령어는 다음 작업을 수행합니다:
-- **macOS**: `Homebrew`를 사용하여 Neovim(HEAD), ripgrep, fd, cmake, go 설치
+- **macOS**: `Homebrew`를 사용하여 Neovim(HEAD), ripgrep, fd, cmake, go, macism(한글 입력기 자동 전환용) 설치
 - **Ubuntu**: `apt` 및 `ppa:neovim-ppa/unstable`을 사용하여 최신 Neovim 및 도구(golang-go 포함) 설치
   - *Ubuntu 주의*: `fd` 명령어를 사용하기 위해 `~/.local/bin`에 심볼릭 링크를 생성합니다. 해당 경로가 `PATH`에 포함되어 있는지 확인해주세요.
 
@@ -52,9 +52,13 @@ make install
 | &nbsp; | *탐색기 너비 조절: 창에서 `5>` (확대), `5<` (축소)* |
 | `<Space> + ff` | 일반 파일 찾기 (숨김 파일 포함) |
 | `<Space> + fg` | **전체 텍스트 검색** (Live Grep) |
+| `<Space> + fb` | 열린 버퍼 목록에서 찾기 |
+| `<Space> + fh` | 도움말(Help) 검색 |
+| `<Space> + /` | 현재 버퍼 내에서 퍼지 검색 |
 | `<Shift> + l / h` | **다음 / 이전 탭으로 이동** |
 | **`<Space> + x`** | **현재 탭(버퍼) 닫기** |
 | `<Space> + ba` | **다른 모든 탭 닫기** (Close Others) |
+| `<Space> + bA` | 열린 버퍼 전체 닫기 (Close All, 안전하게) |
 | `<Space> + n` | 새 빈 문서(Buffer) 열기 |
 | `:ls` | 열린 버퍼 목록 보기 |
 | `:b <이름>` | 특정 버퍼로 이동 (탭 자동완성 지원) |
@@ -86,10 +90,13 @@ Treesitter 기반으로 함수, 클래스, JSON 블록 등을 자동으로 접�
 | 단축키 | 기능 설명 |
 | :--- | :--- |
 | **`g + d`** | **정의로 이동** (Definition) |
+| `g + D` | 선언으로 이동 (Declaration) |
 | `g + r` | 참조 찾기 (References) |
+| `g + i` | 구현으로 이동 (Implementation) |
 | **`K`** | **문서 보기** (Hover) |
 | `<Space> + rn` | 이름 변경 (Rename) |
 | `<Space> + ca` | 코드 액션 (Code Action) |
+| `<Space> + ds` | 현재 줄 진단 메시지 보기 (Line Diagnostics) |
 | `[d` / `]d` | 이전 / 다음 에러 위치 이동 |
 | **`<Ctrl> + o`** | **이전 위치로 돌아가기** (Jump Back) |
 | `<Ctrl> + i` | 다음 위치로 이동 (Jump Forward) |
@@ -122,6 +129,10 @@ Neovim 안에서 터미널을 열어 셸 명령을 바로 실행할 수 있습�
 | `<Space> + hb` | 현재 줄의 Git Blame 보기 |
 | `<Space> + hd` | 변경 사항 비교 (Diff) |
 | `<Space> + hp` | 변경 사항 미리보기 (Preview) |
+| `<Space> + hs` | 현재 Hunk 스테이지 (Stage Hunk) |
+| `<Space> + hr` | 현재 Hunk 되돌리기 (Reset Hunk) |
+| `<Space> + hS` | 버퍼 전체 스테이지 (Stage Buffer) |
+| `<Space> + hu` | Hunk 스테이지 취소 (Undo Stage Hunk) |
 | `]c` / `[c` | 다음 / 이전 변경 지점(Hunk) 이동 |
 
 ### 8. 🧪 테스트 실행 (Neotest)
@@ -143,6 +154,31 @@ Neovim 안에서 터미널을 열어 셸 명령을 바로 실행할 수 있습�
 | **`<Space> + db`** | **중단점 설정/해제** |
 | `<Space> + du` | 디버깅 UI 토글 |
 
+### 10. 📝 마크다운 프리뷰 (Markdown Preview)
+
+Mermaid 다이어그램 렌더링을 지원하는 브라우저 기반 실시간 마크다운 프리뷰입니다. 마크다운(`.md`) 파일을 열었을 때만 활성화됩니다.
+
+| 단축키/명령어 | 기능 설명 |
+| :--- | :--- |
+| **`<Space> + mp`** | **프리뷰 토글** (켜기/끄기, 브라우저 자동으로 열림) |
+| `:MarkdownPreviewOpen` | 프리뷰가 켜진 상태로 바로 시작 (커맨드라인 진입용) |
+
+> **커맨드라인에서 바로 켜기**: `nvim -c MarkdownPreviewOpen file.md`. 자주 쓴다면 셸 별칭을 등록해 `mdp file.md`처럼 짧게 쓸 수 있습니다 (예: `~/.zshrc`에 `mdp() { nvim -c "MarkdownPreviewOpen" "$1"; }` 추가).
+>
+> **참고**: 다크 테마로 렌더링되며, ` ```mermaid ` 코드 블록 안의 다이어그램도 자동으로 그려집니다. 다른 마크다운 파일로 이동해도 `<Space> + mp` 하나로 프리뷰를 새 파일 기준으로 다시 켜고 끌 수 있습니다.
+
+### 11. 💾 세션 관리 (Session)
+
+같은 디렉토리 + 같은 git 브랜치 조합으로 작업하던 버퍼/창 레이아웃을 자동으로 저장하고 복원합니다. 인수 없이 `nvim`으로 열면 자동 복원되므로, 아래 단축키는 자동 복원을 원치 않거나 수동으로 다시 불러올 때만 필요합니다.
+
+| 단축키 | 기능 설명 |
+| :--- | :--- |
+| `<Space> + qs` | 현재 디렉토리+브랜치 세션 복원 |
+| `<Space> + ql` | 가장 최근 세션 복원 |
+| `<Space> + qd` | 세션 자동 저장 중지 |
+
+> **참고**: `nvim file.lua`처럼 파일을 지정하거나 stdin으로 파이프할 때는 자동 복원이 동작하지 않습니다.
+
 ---
 
 ## 🌐 지원 언어 및 도구
@@ -162,7 +198,7 @@ Neovim 안에서 터미널을 열어 셸 명령을 바로 실행할 수 있습�
 1.  **명령어 힌트**: `<Space>` 키를 누르고 잠시 기다리면 하단에 가능한 단축키 목록이 자동으로 나타납니다.
 2.  **창 이동**: 여러 창을 나누었을 때 `<Ctrl> + h/j/k/l` 키로 자유롭게 이동할 수 있습니다.
 3.  **플러그인 관리**: 새로운 플러그인을 추가하거나 업데이트하려면 `:Lazy` 명령어를 입력하세요.
-4.  **한글 입력 자동 전환**: Normal mode 진입 시 자동으로 영문 입력기로 전환되고, Insert mode 진입 시 이전 입력기(한글)로 복원됩니다. (`im-select` CLI 필요 — `~/.local/bin/im-select`)
+4.  **한글 입력 자동 전환**: Normal mode 진입 시 자동으로 영문 입력기로 전환되고, Insert mode 진입 시 이전 입력기(한글)로 복원됩니다. (`macism` CLI 필요 — `make install`로 자동 설치됨)
 5.  **검색 하이라이트 제거**:
     - **자동 제거**: Insert 모드에서 `<Esc>`를 누르면 자동으로 검색 하이라이트가 제거됩니다.
     - **수동 제거**: `:noh` (또는 `:nohlsearch`) 명령어로 언제든 제거 가능합니다.

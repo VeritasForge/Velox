@@ -15,7 +15,15 @@
 ### 1. 문서 업데이트
 1. 현재 프로젝트의 디렉토리 구조를 분석합니다 (`lua/` 하위 파일들)
 2. README.md와 CLAUDE.md 파일을 읽습니다
-3. 변경된 내용에 따라 문서를 업데이트합니다
+3. **완전성 검증 (필수)**: 아래 명령으로 코드의 키맵/커맨드 전체 목록을 뽑아 README.md 단축키 가이드와 하나씩 대조합니다. 최근 변경 여부와 무관하게, README에 없는 항목은 반드시 추가합니다. (diff만으로는 예전부터 미문서화된 기존 기능을 잡아내지 못합니다.)
+   ```bash
+   grep -n 'keys = {\|vim\.keymap\.set(\|nvim_create_user_command' lua/plugins/*.lua lua/config/keymaps.lua
+   ```
+4. **변경 범위 확인**: diff 기준점으로 임의의 "최근 N개 커밋"을 쓰지 않고, README.md/CLAUDE.md가 마지막으로 수정된 커밋을 사용합니다.
+   ```bash
+   git diff --stat $(git log -1 --format=%H -- README.md CLAUDE.md)..HEAD
+   ```
+5. 3번(전수 대조)과 4번(diff) 결과를 종합해 문서를 업데이트합니다.
 
 ### 2. 권한 설정 동기화
 현재 세션에서 사용자가 승인한 권한들을 `.claude/settings.local.json`에 기록하여, 이후 동일한 작업 시 반복적인 승인 요청을 방지합니다.
