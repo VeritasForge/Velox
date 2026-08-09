@@ -41,6 +41,21 @@ return {
         { "<leader>du", desc = "DAP UI" },
         { "<leader>dt", desc = "Go test debug (tags)" },
       })
+
+      -- markdown-only entries: `cond` on wk.add() is evaluated once when the
+      -- queued spec is drained (shortly after VeryLazy), not per popup open,
+      -- so it can't gate on "is the current buffer markdown" at query time.
+      -- Registering from a FileType autocmd re-runs wk.add() with the actual
+      -- markdown buffer current each time one is entered.
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "markdown",
+        callback = function()
+          wk.add({
+            { "<leader>m", group = "markdown" },
+            { "<leader>mp", desc = "Toggle preview" },
+          })
+        end,
+      })
     end,
   },
 }

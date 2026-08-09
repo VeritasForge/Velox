@@ -17,6 +17,9 @@ Session.vim
 # Brainstorming visual companion scratch files (mockups, not project docs)
 .superpowers/
 
+# Playwright MCP test-run artifacts (snapshots/console logs, not project files)
+.playwright-mcp/
+
 # Docs (specs are committed for traceability; everything else under docs/ stays local, e.g. plans/)
 docs/*
 !docs/superpowers/
