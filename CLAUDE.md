@@ -34,6 +34,7 @@ Each file in `lua/plugins/` is a self-contained lazy.nvim plugin spec (table wit
 | File | Responsibility |
 |------|---------------|
 | `lsp.lua` | LSP configs (pyright, gopls, kotlin_language_server, jsonls+schemastore), nvim-cmp completion, Mason auto-install |
+| `markdown-preview.lua` | Browser-based live markdown preview with Mermaid rendering (`selimacerbas/markdown-preview.nvim`), manual `<leader>mp` toggle |
 | `colorscheme.lua` | Darcula colorscheme + Python PyCharm-style treesitter highlight overrides |
 | `ui.lua` | Neo-tree file explorer, lualine statusline (with winbar relative path, OS icon), bufferline tabs, fidget |
 | `editor.lua` | mini.bufremove (safe buffer delete), Comment.nvim, autopairs, indent-blankline |
@@ -84,6 +85,8 @@ Each file in `lua/plugins/` is a self-contained lazy.nvim plugin spec (table wit
 **netrw disabled** - `init.lua`에서 `vim.g.loaded_netrw = 1`로 비활성화. Neo-tree가 대체하며, 디렉토리 인수(`nvim .`)는 Neo-tree의 `init` 블록 VimEnter autocmd가 처리. netrw를 다시 활성화하지 않도록 주의.
 
 **Diagnostic float on CursorHold** - A `CursorHold` autocmd in `lsp.lua` automatically opens a floating window (`vim.diagnostic.open_float`) showing the full diagnostic message at the cursor position. This supplements `virtual_text` which can be truncated on long lines. The float is `focusable = false` and `scope = "cursor"`. Responsiveness depends on `updatetime` (default 4s; lower to ~300ms in `options.lua` if needed).
+
+**Markdown preview toggle state** - `markdown-preview.nvim`은 `:MarkdownPreview`/`:MarkdownPreviewStop`만 제공하고 토글 커맨드가 없다. `lua/plugins/markdown-preview.lua`가 어떤 버퍼를 프리뷰 중인지(`preview_buf`, 불리언이 아니라 bufnr) 직접 추적해 `<leader>mp` 하나로 시작/중지/재타겟을 처리한다 — 플러그인 기본값(`instance_mode = "takeover"`)이 서버 인스턴스 하나를 공유하기 때문에 불리언만으로는 다른 마크다운 버퍼로 옮겼을 때 잘못 꺼버리는 버그가 생긴다. 이 키맵은 `keys`의 `ft = "markdown"` 필드로 마크다운 버퍼에만 스코프된다. `whichkey.lua`의 해당 그룹 항목도 `cond`가 아니라 `FileType` 오토커맨드로 등록된다 — which-key의 `cond`는 로드 시 한 번만 평가되어 동적 버퍼 스코프에 쓸 수 없기 때문.
 
 ## Adding a New Plugin
 
