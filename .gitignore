@@ -20,11 +20,13 @@ Session.vim
 # Playwright MCP test-run artifacts (snapshots/console logs, not project files)
 .playwright-mcp/
 
-# Docs (specs are committed for traceability; everything else under docs/ stays local, e.g. plans/)
+# Docs (specs and accumulated solutions/learnings are committed for
+# traceability; everything else under docs/ stays local, e.g. plans/)
 docs/*
 !docs/superpowers/
 docs/superpowers/*
 !docs/superpowers/specs/
+!docs/solutions/
 
 # Note: Do NOT ignore lazy-lock.json. It ensures plugin version consistency across machines.
 
