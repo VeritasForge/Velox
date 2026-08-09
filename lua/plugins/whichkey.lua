@@ -2,6 +2,26 @@ return {
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
+    -- init runs at startup, before the VeryLazy-gated config() below. A
+    -- markdown file passed on the command line fires FileType before
+    -- VeryLazy ever does (VeryLazy waits for UIEnter, which is itself after
+    -- VimEnter and buffer loading), so registering this autocmd inside
+    -- config() would miss that first buffer entirely. require() inside the
+    -- callback is safe -- it only triggers which-key's lazy-load when a
+    -- markdown buffer is actually entered. `buffer = event.buf` scopes the
+    -- popup entries to that buffer -- without it, which-key shows "markdown"
+    -- in every filetype's popup forever after the first markdown file opens.
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "markdown",
+        callback = function(event)
+          require("which-key").add({
+            { "<leader>m", group = "markdown", buffer = event.buf },
+            { "<leader>mp", desc = "Toggle preview", buffer = event.buf },
+          })
+        end,
+      })
+    end,
     config = function()
       local wk = require("which-key")
       wk.setup({})
@@ -40,21 +60,6 @@ return {
         { "<leader>dr", desc = "REPL" },
         { "<leader>du", desc = "DAP UI" },
         { "<leader>dt", desc = "Go test debug (tags)" },
-      })
-
-      -- markdown-only entries: `cond` on wk.add() is evaluated once when the
-      -- queued spec is drained (shortly after VeryLazy), not per popup open,
-      -- so it can't gate on "is the current buffer markdown" at query time.
-      -- Registering from a FileType autocmd re-runs wk.add() with the actual
-      -- markdown buffer current each time one is entered.
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = "markdown",
-        callback = function()
-          wk.add({
-            { "<leader>m", group = "markdown" },
-            { "<leader>mp", desc = "Toggle preview" },
-          })
-        end,
       })
     end,
   },

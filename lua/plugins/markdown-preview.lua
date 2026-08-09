@@ -17,6 +17,20 @@ local function toggle_markdown_preview()
     -- never set).
     if require("markdown_preview")._is_primary ~= nil then
       preview_buf = current
+      -- The plugin never clears its own state when the previewed buffer
+      -- disappears (e.g. via this repo's mini.bufremove close keymap instead
+      -- of toggling preview off first), so the server would otherwise keep
+      -- running orphaned until the next toggle happens to retarget it.
+      vim.api.nvim_create_autocmd({ "BufDelete", "BufWipeout" }, {
+        buffer = current,
+        once = true,
+        callback = function()
+          if preview_buf == current then
+            vim.cmd("MarkdownPreviewStop")
+            preview_buf = nil
+          end
+        end,
+      })
     end
   end
 end
