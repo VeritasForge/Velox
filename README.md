@@ -142,17 +142,23 @@ Neovim 안에서 터미널을 열어 셸 명령을 바로 실행할 수 있습�
 | **`<Space> + tr`** | **현재 테스트 실행** (Run Nearest) |
 | `<Space> + tf` | 현재 파일의 모든 테스트 실행 |
 | `<Space> + ts` | **테스트 요약 보기** (Summary) |
-| `<Space> + to` | 테스트 결과 출력 보기 (Output) |
+| `<Space> + to` | 테스트 결과 출력 보기 (Output, 플로팅 창) |
+| `<Space> + tp` | 출력 패널 토글 (하단, pytest 원본 출력) |
 | `<Space> + td` | 테스트 디버깅 (Debug) |
+
+> **참고**: `tr`/`tf`로 테스트를 실행하면 성공/실패와 무관하게 화면 하단에 pytest 원본 출력 패널이 자동으로 열립니다. 코드 옆 아이콘(virtual text)으로도 개별 테스트의 성공/실패를 바로 확인할 수 있습니다.
 
 ### 9. 🐞 디버깅 (DAP)
 
 | 단축키 | 기능 설명 |
 | :--- | :--- |
 | `<F5>` | 디버깅 시작 / 계속 |
-| `<F10> / <F11>` | Step Over / Step Into |
+| `<F10> / <F11> / <F12>` | Step Over / Step Into / Step Out |
 | **`<Space> + db`** | **중단점 설정/해제** |
+| `<Space> + dB` | 조건부 중단점 설정 (조건식 입력) |
+| `<Space> + dr` | DAP REPL 열기 |
 | `<Space> + du` | 디버깅 UI 토글 |
+| `<Space> + dt` | Go 테스트 디버깅 (빌드 태그 입력 가능) |
 
 ### 10. 📝 마크다운 프리뷰 (Markdown Preview)
 

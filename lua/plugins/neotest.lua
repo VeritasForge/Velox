@@ -40,13 +40,19 @@ return {
           require("neotest-plenary"),
         },
         status = { virtual_text = true },
-        output = { open_on_run = true },
+        output = { open_on_run = false },
       })
 
       -- Keymaps
       local map = vim.keymap.set
-      map("n", "<leader>tr", function() neotest.run.run() end, { desc = "Run nearest test" })
-      map("n", "<leader>tf", function() neotest.run.run(vim.fn.expand("%")) end, { desc = "Run file tests" })
+      map("n", "<leader>tr", function()
+        neotest.run.run()
+        neotest.output_panel.open()
+      end, { desc = "Run nearest test" })
+      map("n", "<leader>tf", function()
+        neotest.run.run(vim.fn.expand("%"))
+        neotest.output_panel.open()
+      end, { desc = "Run file tests" })
       map("n", "<leader>ts", function() neotest.summary.toggle() end, { desc = "Toggle test summary" })
       map("n", "<leader>to", function() neotest.output.open({ enter = true }) end, { desc = "Show test output" })
       map("n", "<leader>tp", function() neotest.output_panel.toggle() end, { desc = "Toggle output panel" })
