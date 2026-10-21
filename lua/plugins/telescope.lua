@@ -62,6 +62,17 @@ return {
 
       vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live grep (project)" })
 
+      -- glob으로 대상 파일을 제한한 live grep (예: *.md, test_*.py, {*.md,test_*.py})
+      vim.keymap.set("n", "<leader>fG", function()
+        vim.ui.input({ prompt = "Glob (e.g. *.md, test_*.py): " }, function(glob)
+          glob = glob and vim.trim(glob) or ""
+          if glob == "" then
+            return
+          end
+          builtin.live_grep({ glob_pattern = glob, prompt_title = "Live Grep (" .. glob .. ")" })
+        end)
+      end, { desc = "Live grep (glob filter)" })
+
       vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
       vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Buffers" })
       vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help" })

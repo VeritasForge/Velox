@@ -30,6 +30,7 @@ return {
         { "<leader>f", group = "find/search" },
         { "<leader>ff", desc = "Find files" },
         { "<leader>fg", desc = "Live grep" },
+        { "<leader>fG", desc = "Live grep (glob filter)" },
         { "<leader>fb", desc = "Buffers" },
         { "<leader>/", desc = "Fuzzy find in buffer" },
         { "<leader>e", desc = "Explorer" },

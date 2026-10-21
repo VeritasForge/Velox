@@ -50,8 +50,10 @@ make install
 | **`<Ctrl> + p`** | **스마트 파일 찾기** (프로젝트 내 파일 검색) |
 | `<Space> + e` | **파일 탐색기** (Neo-tree) 토글 |
 | &nbsp; | *탐색기 너비 조절: 창에서 `5>` (확대), `5<` (축소)* |
+| &nbsp; | *숨김 파일 표시 토글: 탐색기 창에서 `H`* |
 | `<Space> + ff` | 일반 파일 찾기 (숨김 파일 포함) |
 | `<Space> + fg` | **전체 텍스트 검색** (Live Grep) |
+| `<Space> + fG` | 특정 파일만 텍스트 검색 (glob 입력, 예: `*.md`, `test_*.py`, `{*.md,test_*.py}`) |
 | `<Space> + fb` | 열린 버퍼 목록에서 찾기 |
 | `<Space> + fh` | 도움말(Help) 검색 |
 | `<Space> + /` | 현재 버퍼 내에서 퍼지 검색 |
@@ -98,8 +100,8 @@ Treesitter 기반으로 함수, 클래스, JSON 블록 등을 자동으로 접�
 | `<Space> + ca` | 코드 액션 (Code Action) |
 | `<Space> + ds` | 현재 줄 진단 메시지 보기 (Line Diagnostics) |
 | `[d` / `]d` | 이전 / 다음 에러 위치 이동 |
-| **`<Ctrl> + o`** | **이전 위치로 돌아가기** (Jump Back) |
-| `<Ctrl> + i` | 다음 위치로 이동 (Jump Forward) |
+| **`<Ctrl> + i`** | **이전 위치로 돌아가기** (Jump Back) |
+| `<Ctrl> + o` | 다음 위치로 이동 (Jump Forward) |
 
 ### 5. ✍️ 편집 및 도구 (Editing & Tools)
 
