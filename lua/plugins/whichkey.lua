@@ -50,6 +50,11 @@ return {
         { "<leader>hb", desc = "Toggle blame" },
         { "<leader>hd", desc = "Diff this" },
 
+        { "<leader>g", group = "git(diffview)" },
+        { "<leader>gd", desc = "Diffview open (conflicts/changes)" },
+        { "<leader>gq", desc = "Diffview close" },
+        { "<leader>gh", desc = "File history" },
+
         { "<leader>q", group = "session" },
         { "<leader>qs", desc = "Restore session (cwd)" },
         { "<leader>ql", desc = "Restore last session" },

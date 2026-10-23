@@ -42,6 +42,16 @@ return {
       pattern = "PersistenceSavePre",
       callback = function()
         pcall(vim.cmd, "Neotree close")
+        -- diffview 탭은 diffview:// 가상 버퍼라 복원 시 빈 창만 남으므로 모두 닫는다
+        local dv = package.loaded["diffview.lib"]
+        if dv then
+          for _, view in ipairs(vim.list_slice(dv.views)) do
+            pcall(function()
+              view:close()
+              dv.dispose_view(view)
+            end)
+          end
+        end
         for _, buf in ipairs(vim.api.nvim_list_bufs()) do
           if vim.api.nvim_buf_is_valid(buf) then
             local ft = vim.bo[buf].filetype

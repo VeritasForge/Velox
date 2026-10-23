@@ -41,7 +41,7 @@ Each file in `lua/plugins/` is a self-contained lazy.nvim plugin spec (table wit
 | `telescope.lua` | Fuzzy finder with fzf-native, smart git_files→find_files fallback |
 | `treesitter.lua` | Syntax highlighting and parsing |
 | `formatting.lua` | conform.nvim (format-on-save) + nvim-lint |
-| `git.lua` | gitsigns (hunks, blame, diff) |
+| `git.lua` | gitsigns (hunks, blame, diff), diffview.nvim (3-way merge conflict resolution, file history) |
 | `whichkey.lua` | Keymap discovery popup |
 | `dap.lua` | Debug adapter protocol (debugpy, delve) |
 | `neotest.lua` | Test runner (pytest, Go, Plenary adapters) |
